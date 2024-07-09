@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendButton = document.getElementById('send-btn');
 
     // Simulate initial message from Presidency College
-    simulateIncomingMessage('Welcome to our orientation');
+    simulateIncomingMessage('Welcome to the orientation batch-2024');
 
     // Simulate incoming message after delay
     function simulateIncomingMessage(message) {
