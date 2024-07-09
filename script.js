@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
 
         // Check for welcome message to show options
-        if (message.toLowerCase() === 'welcome to our orientation') {
+        if (message.toLowerCase() === 'welcome to the orientation-2024') {
             setTimeout(function() {
                 showOptions();
             }, 1000); // Wait a moment before showing options
