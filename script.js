@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendButton = document.getElementById('send-btn');
 
     // Simulate initial message from Presidency College
-    simulateIncomingMessage('Welcome to the orientation batch-2024');
+    simulateIncomingMessage('Welcome to our orientation');
 
     // Simulate incoming message after delay
     function simulateIncomingMessage(message) {
@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
         // Simulate incoming message after sending
-        simulateIncomingMessage(message);
+        if (message.toLowerCase() !== 'welcome to the orientation') {
+            simulateIncomingMessage(message);
+        }
     }
 
     // Function to receive a message from Presidency College
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
 
         // Check for welcome message to show options
-        if (message.toLowerCase() === 'welcome to the orientation-2024') {
+        if (message.toLowerCase() === 'welcome to our orientation') {
             setTimeout(function() {
                 showOptions();
             }, 1000); // Wait a moment before showing options
@@ -65,9 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const optionsMessage = `
             <div class="message-box">
                 <p>Choose an option:</p>
-                <p class="reply-option venue" data-option="venue">Where is the venue?</p>
-                <p class="reply-option contact" data-option="contact">Contact us</p>
-                <p class="reply-option social" data-option="social">Follow us on social media</p>
+                <p class="reply-option" data-option="venue">Where is the venue?</p>
+                <p class="reply-option" data-option="contact">Contact us</p>
+                <p class="reply-option" data-option="social">Follow us on social media</p>
             </div>
         `;
         const optionsElement = document.createElement('div');
@@ -86,13 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const selectedOption = option.getAttribute('data-option');
                 handleReply(selectedOption);
             });
-            // Apply initial styles (optional)
-            option.style.backgroundColor = '#0D47A1'; // Dark shade of blue
-            option.style.color = '#ffffff'; // White text
-            option.style.cursor = 'pointer'; // Change cursor to pointer for interaction
-            option.style.padding = '5px 10px'; // Adjust padding for better click area
-            option.style.borderRadius = '5px'; // Add border radius for styling
-            option.style.marginBottom = '5px'; // Add margin between options
         });
 
         // Scroll to bottom of messages
@@ -106,36 +101,39 @@ document.addEventListener('DOMContentLoaded', function() {
         switch (option) {
             case 'venue':
                 replyMessage = 'The venue is the auditorium';
+                sendMessage(replyMessage);
                 break;
             case 'contact':
-                replyMessage = 'Call us on +91 1234567890';
+                replyMessage = 'Call us on +91-9513962949';
+                sendMessage(replyMessage);
                 break;
             case 'social':
-                replyMessage = `
-                    Choose a platform:
-                    <p class="reply-option facebook" data-option="facebook">Facebook</p>
-                    <p class="reply-option instagram" data-option="instagram">Instagram</p>
-                    <p class="reply-option website" data-option="website">Website</p>
-                `;
+                showSocialOptions();
                 break;
             case 'facebook':
-                window.open('https://www.facebook.com/presidencycollege.ac.in/', '_blank');
                 replyMessage = 'Redirecting to Facebook...';
+                sendMessage(replyMessage);
+                setTimeout(function() {
+                    window.location.href = 'https://www.facebook.com/presidencycollege.ac.in/';
+                }, 1000);
                 break;
             case 'instagram':
-                window.open('https://www.instagram.com/presidencycollege/', '_blank');
                 replyMessage = 'Redirecting to Instagram...';
+                sendMessage(replyMessage);
+                setTimeout(function() {
+                    window.location.href = 'https://www.instagram.com/presidencycollege/';
+                }, 1000);
                 break;
             case 'website':
-                window.open('https://presidencycollege.ac.in/', '_blank');
                 replyMessage = 'Redirecting to our website...';
+                sendMessage(replyMessage);
+                setTimeout(function() {
+                    window.location.href = 'https://presidencycollege.ac.in/';
+                }, 1000);
                 break;
             default:
                 break;
         }
-
-        // Simulate a response message in the chat
-        sendMessage(replyMessage);
     }
 
     // Function to show social options
@@ -143,9 +141,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const socialOptionsMessage = `
             <div class="message-box">
                 <p>Choose a platform:</p>
-                <p class="reply-option facebook" data-option="facebook">Facebook</p>
-                <p class="reply-option instagram" data-option="instagram">Instagram</p>
-                <p class="reply-option website" data-option="website">Website</p>
+                <p class="reply-option" data-option="facebook">Facebook</p>
+                <p class="reply-option" data-option="instagram">Instagram</p>
+                <p class="reply-option" data-option="website">Website</p>
             </div>
         `;
         const socialOptionsElement = document.createElement('div');
@@ -164,13 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const selectedOption = option.getAttribute('data-option');
                 handleReply(selectedOption);
             });
-            // Apply initial styles (optional)
-            option.style.backgroundColor = '#0D47A1'; // Dark shade of blue
-            option.style.color = '#ffffff'; // White text
-            option.style.cursor = 'pointer'; // Change cursor to pointer for interaction
-            option.style.padding = '5px 10px'; // Adjust padding for better click area
-            option.style.borderRadius = '5px'; // Add border radius for styling
-            option.style.marginBottom = '5px'; // Add margin between options
         });
 
         // Scroll to bottom of messages
